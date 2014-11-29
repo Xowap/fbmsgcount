@@ -60,7 +60,6 @@
             var self = this,
                 promises = {},
                 fbStatus,
-                fbAuthResponse,
                 fbGranted,
 
                 // Methods
@@ -82,7 +81,6 @@
 
             handleAuthResponse = function (response) {
                 fbStatus = response.status;
-                fbAuthResponse = response.authResponse;
             };
 
             updateGranted = function () {

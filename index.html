@@ -37,6 +37,10 @@
 
 <div class="container" ng-if="mode === 'list'">
     <h1>My Messages</h1>
+
+    <ul>
+        <li ng-repeat="user in list">{{ user.id }}</li>
+    </ul>
 </div>
 </body>
 </html>

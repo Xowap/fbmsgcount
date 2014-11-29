@@ -18,7 +18,7 @@
                 oauth: true,
                 authResponse: undefined,
                 fbGranted: null,
-                version: 'v2.0'
+                version: 'v2.2'
             },
 
             // Objects
@@ -98,6 +98,12 @@
                                 if (v.status === 'granted') {
                                     newPerms.push(v.permission);
                                 }
+
+                                ng.forEach(v, function (subV, subK) {
+                                    if (subV === 1) {
+                                        newPerms.push(subK);
+                                    }
+                                });
                             });
 
                             fbGranted = new FBPerms(newPerms.join(','));

@@ -48,11 +48,13 @@
             var output = [];
 
             ng.forEach(list, function (item) {
-                output.push({
-                    id: item.recipients[0] === item.viewer_id
-                        ? item.recipients[1] : item.recipients[0],
-                    count: item.message_count
-                });
+                if (item.recipients.length === 2) {
+                    output.push({
+                        id: item.recipients[0] === item.viewer_id
+                            ? item.recipients[1] : item.recipients[0],
+                        count: item.message_count
+                    });
+                }
             });
 
             return output;

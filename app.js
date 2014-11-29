@@ -30,7 +30,7 @@
         var logIn;
 
         logIn = function () {
-            fb.loaded().then(function () {
+            fb.connected('read_mailbox').then(function () {
                 console.log('loaded');
             });
         };

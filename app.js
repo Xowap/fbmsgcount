@@ -85,6 +85,7 @@
         // Public methods
         $scope.logIn = logIn;
         $scope.graphObject = fb.graphObject;
+        $scope.loadList = loadList;
 
         (function () {
             $scope.$watch('mode', function (mode) {

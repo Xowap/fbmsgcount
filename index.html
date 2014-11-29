@@ -36,7 +36,10 @@
 </div>
 
 <div class="container" ng-if="mode === 'list'">
-    <h1>My Messages</h1>
+    <h1>
+        My Messages
+        <button class="btn btn-primary btn-lg" ng-click="loadList()">Refresh</button>
+    </h1>
 
     <div class="media" ng-repeat="user in list">
         <a class="media-left" ng-href="//facebook.com/{{ user.id }}" target="_blank">

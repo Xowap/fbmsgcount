@@ -7,7 +7,7 @@
 
     var app = ng.module('fbmsgcount', ['freneticbunny']),
 
-        PERMS = 'read_mailbox';
+        PERMS = 'read_mailbox,user_friends';
 
     app.config(function (fbProvider) {
         fbProvider.setOptions({
@@ -82,6 +82,7 @@
 
         // Public methods
         $scope.logIn = logIn;
+        $scope.graphObject = fb.graphObject;
 
         (function () {
             $scope.$watch('mode', function (mode) {

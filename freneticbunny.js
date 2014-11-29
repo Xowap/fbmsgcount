@@ -56,9 +56,10 @@
             };
         };
 
-        FreneticBunny = function ($q, $document) {
+        FreneticBunny = function ($q, $document, $rootScope) {
             var self = this,
                 promises = {},
+                cache = {},
                 fbStatus,
                 fbGranted,
 
@@ -69,7 +70,8 @@
                 loaded,
                 initialized,
                 authenticated,
-                connected;
+                connected,
+                graphObject;
 
             promiseFactory = function (name, callback) {
                 if (!promises.hasOwnProperty(name)) {
@@ -202,10 +204,34 @@
                 });
             };
 
+            graphObject = function (id) {
+                var output;
+
+                if (cache.hasOwnProperty(id)) {
+                    output = cache[id];
+                } else {
+                    output = {};
+                    cache[id] = output;
+
+                    connected('user_friends').then(function () {
+                        FB.api('/' + id, {}, function (result) {
+                            if (result.id) {
+                                $rootScope.$apply(function () {
+                                    ng.extend(output, result);
+                                });
+                            }
+                        });
+                    });
+                }
+
+                return output;
+            };
+
             self.loaded = loaded;
             self.initialized = initialized;
             self.authenticated = authenticated;
             self.connected = connected;
+            self.graphObject = graphObject;
 
             (function () {
                 fbGranted = new FBPerms(options.fbGranted);
@@ -216,8 +242,8 @@
             ng.extend(options, newOptions);
         };
 
-        $get = function ($q, $document) {
-            return new FreneticBunny($q, $document);
+        $get = function ($q, $document, $rootScope) {
+            return new FreneticBunny($q, $document, $rootScope);
         };
 
         selfP.setOptions = setOptions;

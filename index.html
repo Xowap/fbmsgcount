@@ -38,9 +38,19 @@
 <div class="container" ng-if="mode === 'list'">
     <h1>My Messages</h1>
 
-    <ul>
-        <li ng-repeat="user in list">{{ user.id }}</li>
-    </ul>
+    <div class="media" ng-repeat="user in list">
+        <a class="media-left" ng-href="//facebook.com/{{ user.id }}" target="_blank">
+            <img ng-src="//graph.facebook.com/{{ user.id }}/picture?width=64&height=64" alt=""/>
+        </a>
+        <div class="media-body">
+            <h4 class="media-heading">#{{ $index + 1}}&nbsp;&mdash;&nbsp;{{ graphObject(user.id).name || user.id }}</h4>
+            <p><ng-pluralize count="user.count" when="{
+                '0': 'no messages',
+                '1': '1 message',
+                'other': '{} messages'
+            }"></ng-pluralize></p>
+        </div>
+    </div>
 </div>
 </body>
 </html>
